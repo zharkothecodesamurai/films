@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,6 +7,7 @@ import {
   useParams
 } from 'react-router-dom';
 
+import AppProvider from "./store/AppProvider";
 import Login from "./components/Login/Login";
 import Header from "./components/Layout/Header";
 import Movies from "./components/Movies/Movies";
@@ -15,7 +15,7 @@ import Movies from "./components/Movies/Movies";
 
 function App() {
   return (
-    <Fragment>
+    <AppProvider>
       <Router>
         <Header />
         <Routes>
@@ -27,7 +27,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </Fragment>
+    </AppProvider>
   );
 }
 

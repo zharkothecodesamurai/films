@@ -1,0 +1,13 @@
+.movie {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ccc;
+  }
+  
+
+  .scale:hover {
+    transform: scale(2.5);
+    transition: 1s;
+    }

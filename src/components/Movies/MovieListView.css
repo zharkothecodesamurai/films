@@ -1,0 +1,32 @@
+.Table {
+    width: 100%;
+    height: 80vh;
+    }
+   
+    
+    th {
+    border-bottom: 1px solid black;
+    }
+    
+    td {
+    text-align: center;
+    }
+    
+    .movies {
+        max-width: 60rem;
+        width: 90%;
+        margin: 2rem auto;
+        animation:movies-appear 1s ease-out forwards;
+      }
+
+      @keyframes movies-appear {
+        from {
+          opacity: 0;
+          transform: translateY(3rem);
+        }
+      
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
