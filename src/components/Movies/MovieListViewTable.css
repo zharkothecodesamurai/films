@@ -1,0 +1,11 @@
+.Table {
+    width: 90vw;
+    height: 80vh;
+    margin: 0 auto;
+    }
+      
+    th {
+    border-bottom: 1px solid black;
+
+    }
+    

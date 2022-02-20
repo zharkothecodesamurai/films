@@ -8,11 +8,10 @@ import classes from "./Header.module.css"
 const Header = props => {
     return <Fragment>
         <header className={classes.header}>
-        <Link to={'/'} style={{ textDecoration: 'none', color:"white" }}><h1>Movisimo</h1></Link>
-            <Fragment><Link to={'/login'}>
+            <Link to={'/'} style={{ textDecoration: 'none', color: "white" }}><h1>Movisimo</h1></Link>
+            <Link to={'/login'} style={{ textDecoration: 'none', color: "white" }}>
                 <span className={classes.link}>Log In</span>
-            </Link>  </Fragment>
-
+            </Link>
         </header>
         <div className={classes['main-image']}>
             <img src={movienight} alt="a wall with text" />

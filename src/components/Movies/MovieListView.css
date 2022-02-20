@@ -1,18 +1,4 @@
-.Table {
-    width: 100%;
-    height: 80vh;
-    }
-   
-    
-    th {
-    border-bottom: 1px solid black;
-    }
-    
-    td {
-    text-align: center;
-    }
-    
-    .movies {
+   .movies {
         max-width: 60rem;
         width: 90%;
         margin: 2rem auto;

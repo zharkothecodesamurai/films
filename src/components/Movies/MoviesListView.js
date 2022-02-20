@@ -1,22 +1,28 @@
-import { Fragment, useEffect, useState,useContext } from "react";
+import { Fragment, useEffect, useState, useContext } from "react";
 import Card from "../UI/Card"
 import MovieItem from "./MovieItem/MovieItem";
 import "./MovieListView.css";
+import Configuration from "../../config"
 
 import AppContext from "../../store/app-context";
+import Pagination from "../UI/Pagination";
+import MovieListViewTable from "./MovieListViewTable";
 
 const MoviesListView = () => {
     const [errorHttp, setErrorHttp] = useState();
     const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoaading] = useState(false);
+    const [paginationPage, setPaginationPage] = useState(1);
 
     const appContext = useContext(AppContext);
-    const {isLogged} = appContext
+    const { isLogged } = appContext
     useEffect(() => {
 
         const call = async () => {
             setIsLoaading(true);
-            const response = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=0b1f1cfedf248f6eeeae23f5d5c24190');
+            const key=process.env.REACT_APP_MOVIE_APP_ID;
+            const apiKey= key.replace(/[']+/g, '');
+            const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${paginationPage}`);
 
             if (!response.ok) {
                 throw new Error("Fetching went wrong")
@@ -48,55 +54,35 @@ const MoviesListView = () => {
             setIsLoaading(false);
             setErrorHttp(error.message);
         })
-    }, [])
+    }, [paginationPage])
 
-    let movieItem = movies.map((movie, index) => (
-        <MovieItem key={movie.id}
-            id={movie.id}
-            title={movie.title}
-            image={movie.image}
-            poster={movie.poster}
-            releaseDate={movie.releaseDate}
-            popularity={movie.popularity}
-            identifier={index}
-        />))
+    // let movieItem = movies.map((movie, index) => (
+    //     <MovieItem key={movie.id}
+    //         id={movie.id}
+    //         title={movie.title}
+    //         image={movie.image}
+    //         poster={movie.poster}
+    //         releaseDate={movie.releaseDate}
+    //         popularity={movie.popularity}
+    //         identifier={index}
+    //     />))
 
-    let movieListView = (
-        <div>
-            <table className="Table">
-                <caption><h3>Most Popular Movies</h3></caption>
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" >Title</th>
-                        <th scope="col" >Image</th>
-                        <th scope="col" >Poster</th>
-                        <th scope="col" >Date Release</th>
-                        <th scope="col" >Popularity</th>
-                    </tr>
-                </thead>
+    const currentPageChangeHandler = (currentPage) => {
+        setPaginationPage(currentPage)
+    }
 
-                <tbody >
-
-
-                    {movieItem}
-
-                </tbody>
-
-
-
-            </table>
-        </div>
-    )
-
-
-
-
-
-
-
-
-
+    let movieListView = (movies.length > 0 ? (
+        <Pagination
+            data={movies}
+            RenderComponent={MovieItem}
+            RenderComponentWrapper={MovieListViewTable}
+            title="Movies"
+            pageLimit={5}
+            dataLimit={20}
+            onCurrentPageChange={currentPageChangeHandler} />
+    ) : (
+        <h1>No Posts to display</h1>
+    ))
 
     return (
         <Fragment>
