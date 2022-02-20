@@ -19,7 +19,7 @@ const MovieItem = props => {
                 </NavLink>
                 <td>{props.title}</td>
                 <td><img src={"https://image.tmdb.org/t/p/w200/" + props.image}></img> </td>
-                <td><img className="scale" height='120px' width='100px' src={"https://image.tmdb.org/t/p/w200/" + props.poster}></img> </td>
+                <td><img className="scale" height='120px' width='100px' src={"https://image.tmdb.org/t/p/w200/" + props.poster}></img></td>
                 <td> {date.toDateString()} </td>
                 <td> {props.popularity}</td>
             </tr>

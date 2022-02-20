@@ -10,6 +10,8 @@ import Header from "./components/Layout/Header";
 import Movies from "./components/Movies/Movies";
 import MovieItemDetails from "./components/Movies/MovieItem/MovieItemDetails";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (
