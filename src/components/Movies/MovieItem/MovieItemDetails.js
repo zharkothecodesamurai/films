@@ -1,14 +1,37 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import AppContext from "../../../store/app-context"
+
 import "./MovieItemDetails.css"
+
+import Rating from 'react-simple-star-rating'
+
 
 const MovieItemDetails = (props) => {
     const [details, setDetails] = useState({});
     const paramMovie = useParams();
     const [errorHttp, setErrorHttp] = useState();
     const [isLoading, setIsLoaading] = useState(false);
+    const [rating, setRating] = useState(0);
 
-    const { id } = paramMovie.movieId
+    const AppCtx = useContext(AppContext);
+
+    // let a = (AppCtx.isLogged === false  ?
+    //     <Rating
+    //         onClick={ratingChanged}
+    //         ratingValue={rating}
+    //         size={20}
+    //         stars={10}
+    //         label
+    //         transition
+    //         fillColor='orange'
+    //         emptyColor='gray'
+    //     />: null)
+
+
+    const ratingChanged = (newRating) => {
+        setRating(newRating);
+    }
 
     useEffect(() => {
 
@@ -41,41 +64,45 @@ const MovieItemDetails = (props) => {
 
     return (
         <Fragment>
-            <div className="container2">
-                <div className='sectionsContainer'>
-                    <div>
-                        <img src={"https://image.tmdb.org/t/p/w200/" + details.poster_path}></img>
+            <div className='containerRaiting'>
+                <div className='contianer'>
+               test
+                </div>
+            </div>
+            <div className="containerImage">
+                <div className='sectionsContainerImage'>
+                    <div className='backdrop'>
+                        <img className='img' src={"https://image.tmdb.org/t/p/w200/" + details.poster_path}></img>
                     </div>
                 </div>
-                <div className='sectionsContainer'>
-                    <div className='row'><div className='col'><p >Title : <span>{details.title}</span></p></div>
-                        <div className='col'><p >Budget : <span>{details.budget}</span></p></div>
-                        <div className='col'> <p>Vote status : <span>{details.vote_average}</span></p></div>
-                        <div className='col'><p >Revenue : <span>{details.revenue}</span></p></div></div>
-
-
-
-
-
-                    <div class="taglineInfo">
-
-                        <h3 class="tagline" dir="auto">{details.tagline}</h3>
-
-
-                        <h3 >Overview</h3>
-                        <div>
-
-                            <p>{details.overview}</p>
-
+                <div className='sectionsContainerDetails'>
+                    <div className='container centered'>
+                        <div className='row'>
+                            <div className='col'>
+                                <p ><span className='bold'>Title :</span> <span>{details.title}</span></p></div>
+                            <div className='col'>
+                                <p> <span className='bold'>Budget :</span> <span>{details.budget}</span></p>
+                            </div>
+                            <div className='col'>
+                                <p><span className='bold'>Vote status :</span><span>{details.vote_average}</span></p>
+                            </div>
+                            <div className='col'>
+                                <p ><span className='bold'>Revenue :</span> <span>{details.revenue}</span></p>
+                            </div>
                         </div>
-
-
-
-
                     </div>
-                    {/* OverView : <span>{details.title}</span>
-                   Rezhiser : <span>{details.title}</span>
-                   Title : <span>{details.title}</span> */}
+
+                    <div className='container centered'>
+                        <div class="taglineInfo row ">
+
+                            <h3 >Overview</h3>
+                            <h3 class="tagline">{details.tagline}</h3>
+                            <div>
+                                <p>{details.overview}</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div>
 

@@ -5,7 +5,8 @@ const appReducer = (state,action) =>{
     switch(action.type){
         case "LOGIN":{
         return{
-                isLogged:true
+                isLogged:true,
+                token:action.payload
             }
         }
         case "SIGN_OUT": {      
@@ -19,15 +20,18 @@ const appReducer = (state,action) =>{
 }
 
 const defaultAppState = {
-    isLogged:false
+    isLogged:false,
+    token:''
 }
 
 const AppProvider=(props)=>{
     const [appState,dispatchAppAction]=useReducer(appReducer,defaultAppState)
     
-    const logingInHandler = () =>{
+    const logingInHandler = (value) =>{
+        console.log(value)
         dispatchAppAction({
-            type:"LOGIN"
+            type:"LOGIN",
+            payload:value
         })
     }
 
@@ -38,9 +42,10 @@ const AppProvider=(props)=>{
     }
 
     const appContext = {
+        token:appState.token,
         isLogged:appState.isLogged,
-        logingIn:appState.logingInHandler,
-        signingOut:appState.signOutHandler
+        logingIn:logingInHandler,
+        signingOut:signOutHandler
     }
     return (<AppContext.Provider value={appContext}>
         {props.children}

@@ -1,9 +1,10 @@
 import React from "react";
 
 const AppContext =React.createContext({
+    token:'',
     isLogged:false,
-    login:()=>{},
-    signOut:()=>{}
+    logingIn:(value)=>{},
+    signingOut:()=>{}
 });
 
 export default AppContext

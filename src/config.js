@@ -1,5 +1,5 @@
 const Configuration = {	
-	apiKey: process.env.MOVIE_APP_ID
+	apiKey: process.env.REACT_APP_MOVIE_APP_ID
 	}
 
 export default Configuration;
