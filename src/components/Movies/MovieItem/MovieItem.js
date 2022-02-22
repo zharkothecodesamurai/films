@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import "./MovieItem.css"
 
@@ -14,12 +14,12 @@ const MovieItem = props => {
 
         <Fragment>
             <tr>
-                <NavLink to={`/movie/${id}`} style={{ textDecoration: 'none', color: '#8a2b06' }}>
-                    <th scope="row">{props.identifier}</th>
-                </NavLink>
+                
+                    <th scope="row"><Link to={`/movie/${id}`} style={{ textDecoration: 'none', color: '#8a2b06' }}>{props.identifier}</Link></th>
+                
                 <td>{props.title}</td>
-                <td><img src={"https://image.tmdb.org/t/p/w200/" + props.image}></img> </td>
-                <td><img className="scale" height='120px' width='100px' src={"https://image.tmdb.org/t/p/w200/" + props.poster}></img></td>
+                <td><img alt="backdrop" src={"https://image.tmdb.org/t/p/w200/" + props.image}></img> </td>
+                <td><img alt="poster" className="scale" height='120px' width='100px' src={"https://image.tmdb.org/t/p/w200/" + props.poster}></img></td>
                 <td> {date.toDateString()} </td>
                 <td> {props.popularity}</td>
             </tr>

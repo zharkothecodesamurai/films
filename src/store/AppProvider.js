@@ -3,17 +3,38 @@ import AppContext from "./app-context"
 
 const appReducer = (state,action) =>{
     switch(action.type){
+        case "AUTHENTICATE":{
+            return{
+                initialtoken:action.payload,
+                token:'',
+                isLogged:false,
+                sessionId:state.sessionId
+                }
+            }
         case "LOGIN":{
         return{
+                initialtoken:'',
+                token:action.payload,
+                isLogged:false,
+                sessionId:state.sessionId
+            }
+        }
+        case "SIGN_IN":{
+        return{
                 isLogged:true,
-                token:action.payload
+                sessionId:action.payload,
+                initialtoken:'',
+                token:''
             }
         }
         case "SIGN_OUT": {      
             return {
                 isLogged:false,
+                token:'',
+                initialtoken:'',
+                sessionId:''
             }
-        }
+        }     
       
     }
     return defaultAppState
@@ -21,16 +42,31 @@ const appReducer = (state,action) =>{
 
 const defaultAppState = {
     isLogged:false,
-    token:''
+    token:'',
+    initialtoken:'',
+    sessionId:''
 }
 
 const AppProvider=(props)=>{
     const [appState,dispatchAppAction]=useReducer(appReducer,defaultAppState)
     
     const logingInHandler = (value) =>{
-        console.log(value)
         dispatchAppAction({
             type:"LOGIN",
+            payload:value
+        })
+    }
+    const authenticatingInHandler = (value) =>{
+        dispatchAppAction({
+            type:"AUTHENTICATE",
+            payload:value
+        })
+    }
+
+    const signInHandler = (value) =>{
+
+        dispatchAppAction({
+            type:"SIGN_IN",
             payload:value
         })
     }
@@ -42,10 +78,14 @@ const AppProvider=(props)=>{
     }
 
     const appContext = {
+        initialtoken:appState.initialtoken,
         token:appState.token,
         isLogged:appState.isLogged,
+        sessionId:appState.sessionId,
         logingIn:logingInHandler,
-        signingOut:signOutHandler
+        signingOut:signOutHandler,
+        signningIn:signInHandler,
+        authenticate:authenticatingInHandler
     }
     return (<AppContext.Provider value={appContext}>
         {props.children}

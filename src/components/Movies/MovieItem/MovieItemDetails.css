@@ -1,10 +1,9 @@
 
 .containerRaiting {
     position: absolute;
-    top:27vh;
-    right: 5vw;
-  display: flex;
-  flex-wrap: wrap;
+    top:40vh;
+    left: 65vw;
+  
 
   width: 100%;
   height: 70vh;

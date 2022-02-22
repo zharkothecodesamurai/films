@@ -23,7 +23,7 @@ function App() {
             <Movies />
           </main>}>
           </Route>
-          <Route path="/login" element={<Login />}>
+          <Route path="/login/:status" element={<Login />}>
           </Route>
           <Route path="/movie/:movieId" element={<MovieItemDetails />}>
           </Route>

@@ -9,7 +9,7 @@ function Pagination({ data, RenderComponent, RenderComponentWrapper, title, page
   useEffect(() => {
     window.scrollTo({ behavior: 'smooth', top: '0px' });
     onCurrentPageChange(currentPage);
-  }, [currentPage]);
+  }, [currentPage,onCurrentPageChange]);
 
   function goToNextPage() {
     setCurrentPage((page) => page + 1);
@@ -24,6 +24,8 @@ function Pagination({ data, RenderComponent, RenderComponentWrapper, title, page
     setCurrentPage(pageNumber);
   }
 
+  //the logic behind this is that the items are fetch by page from the api so it always will be from 0-20, 
+  //items are not pushed to context cause this app is demonstration purposes only
   const getPaginatedData = () => {
     // const startIndex = currentPage * dataLimit - dataLimit;
     // const endIndex = startIndex + dataLimit;
